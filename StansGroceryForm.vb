@@ -2,9 +2,11 @@
 'RCET 0265
 'StansGrocery
 'Fall 2020
-'
+'https://github.com/IanGunter/StansGrocery.git
 
-
+Option Strict On
+Option Compare Text
+Option Explicit On
 
 
 Public Class StansGroceryForm
@@ -14,4 +16,12 @@ Public Class StansGroceryForm
         End If
 
     End Sub
+
+    Private Sub StansGroceryForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SplashScreenForm.Show()
+
+    End Sub
+
+
+
 End Class
