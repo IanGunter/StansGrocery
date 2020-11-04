@@ -141,5 +141,11 @@
   <ItemGroup>
     <None Include="Resources\valve-new-intro.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="GroceryList.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vegetables.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
