@@ -10,10 +10,20 @@ Option Explicit On
 
 
 Public Class StansGroceryForm
+
+    Dim tempdata() As String
+    Dim i As Integer
     Private Sub SearchButton_Click(sender As Object, e As EventArgs) Handles SearchButton.Click
         If LookUpTextBox.Text = "zzz" Then
             Me.Close()
         End If
+
+        tempdata = Split(My.Resources.GroceryList, vbNewLine)
+
+        MsgBox(tempdata(i))
+        i += 1
+
+
 
     End Sub
 
