@@ -15,7 +15,7 @@ Public Class StansGroceryForm
     Dim betterSepArray() As String
     Dim sortedAisles() As String
     Dim sortedcategories() As String
-    Dim fullArray2(,) As String
+    Dim fullArray2(,) As String ' This should be named food$()
     Dim sizer As Integer
 
     Private Sub SearchButton_Click(sender As Object, e As EventArgs) Handles SearchButton.Click, SearchToolStripMenuItem.Click
@@ -39,7 +39,7 @@ Public Class StansGroceryForm
 
             If matched.Success = True Then
                 goodData = True
-                DisplayListBox.Items.Add(fullArray2(n, 0))
+                DisplayListBox.Items.Add(fullArray2(n, 0)) 'Crashes on empty search - TJR
                 DisplayLabel.Text = ""
             Else
             End If
@@ -49,9 +49,6 @@ Public Class StansGroceryForm
             DisplayLabel.Text = ("Sorry no matches for " & searchTextBox.Text)
         End If
 
-
-
-
     End Sub
 
     Public Sub StansGroceryForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -60,7 +57,6 @@ Public Class StansGroceryForm
         Dim match As Match
         Dim i As Integer
         Dim u As Integer
-
 
         lineData = Split(My.Resources.GroceryList, vbNewLine)
 
