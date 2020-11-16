@@ -15,7 +15,7 @@ Public Class StansGroceryForm
     Dim betterSepArray() As String
     Dim sortedAisles() As String
     Dim sortedcategories() As String
-    Dim fullArray2(,) As String
+    Dim food(,) As String
     Dim sizer As Integer
 
     Private Sub SearchButton_Click(sender As Object, e As EventArgs) Handles SearchButton.Click, SearchToolStripMenuItem.Click
@@ -26,20 +26,25 @@ Public Class StansGroceryForm
         'closes the program when ZZZ is searched
         If searchTextBox.Text = "zzz" Then
             Me.Close()
+        ElseIf searchTextBox.Text = "" Then
+            DisplayLabel.Text = "Cant be blank..."
+            Exit Sub
         End If
+
+
 
         DisplayListBox.Items.Clear()
 
         'Display items in the displayListbox when they match a search.
         For n = 0 To sizer
             Try
-                matched = Regex.Match(fullArray2(n, 0), searchTextBox.Text, RegexOptions.IgnoreCase)
+                matched = Regex.Match(food(n, 0), searchTextBox.Text, RegexOptions.IgnoreCase)
             Catch ex As Exception
             End Try
 
             If matched.Success = True Then
                 goodData = True
-                DisplayListBox.Items.Add(fullArray2(n, 0))
+                DisplayListBox.Items.Add(food(n, 0))
                 DisplayLabel.Text = ""
             Else
             End If
@@ -95,7 +100,7 @@ Public Class StansGroceryForm
         Next
 
         'Copy FullArray into FullArray 2 to make a global 
-        fullArray2 = fullArray
+        food = fullArray
 
         'Add Items to listBox
         For Variable = 0 To sizer
@@ -117,7 +122,7 @@ Public Class StansGroceryForm
         Dim Ailes(sizer) As String
 
         For a = 0 To sizer
-            Ailes(a) = fullArray2(a, 1)
+            Ailes(a) = food(a, 1)
 
             Dim stuff As String = String.Join(",", Ailes)
             Dim dedupe As String = DuplicateRemover(stuff)
@@ -136,7 +141,7 @@ Public Class StansGroceryForm
         Dim Category(sizer) As String
 
         For b = 0 To sizer
-            Category(b) = fullArray2(b, 2)
+            Category(b) = food(b, 2)
 
             Dim stuff As String = String.Join(",", Category)
             Dim dedupe As String = DuplicateRemover(stuff)
@@ -198,19 +203,19 @@ Public Class StansGroceryForm
         For s = 0 To sizer
             For f = 0 To 2
                 If AisleRadioButton.Checked = True Then
-                    If SelectItemComboBox.SelectedItem.ToString() = fullArray2(s, f) Or SelectItemComboBox.SelectedItem.ToString() = " " & fullArray2(s, f) Then
-                        DisplayListBox.Items.Add(fullArray2(s, 0))
+                    If SelectItemComboBox.SelectedItem.ToString() = food(s, f) Or SelectItemComboBox.SelectedItem.ToString() = " " & food(s, f) Then
+                        DisplayListBox.Items.Add(food(s, 0))
                     End If
                 Else
-                    If SelectItemComboBox.SelectedItem.ToString() = fullArray2(s, f) Then
-                        DisplayListBox.Items.Add(fullArray2(s, 0))
+                    If SelectItemComboBox.SelectedItem.ToString() = food(s, f) Then
+                        DisplayListBox.Items.Add(food(s, 0))
                     End If
                 End If
 
             Next
             If SelectItemComboBox.SelectedItem.ToString() = "Show All" Then
                 Try
-                    DisplayListBox.Items.Add(fullArray2(s, 0))
+                    DisplayListBox.Items.Add(food(s, 0))
                 Catch ex As Exception
                 End Try
             End If
@@ -221,8 +226,8 @@ Public Class StansGroceryForm
 
         'Updates the display label with the location when an item is selected.
         For x = 0 To sizer
-            If DisplayListBox.SelectedItem.ToString() = fullArray2(x, 0) Then
-                DisplayLabel.Text = ("You will find " & fullArray2(x, 0) & " in aisle " & fullArray2(x, 1) & " around the " & fullArray2(x, 2))
+            If DisplayListBox.SelectedItem.ToString() = food(x, 0) Then
+                DisplayLabel.Text = ("You will find " & food(x, 0) & " in aisle " & food(x, 1) & " around the " & food(x, 2))
             End If
         Next
 
